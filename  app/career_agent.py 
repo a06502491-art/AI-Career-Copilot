@@ -1,0 +1,43 @@
+import os
+from openai import OpenAI
+
+class CareerCopilotAgent:
+    def __init__(self):
+        # 这里写的是你的AI角色设定，面试官看这里就知道你的Prompt设计能力
+        self.system_prompt = """
+        你是一个资深的 AI 求职顾问 (AI-Career-Copilot)。
+        你的任务是帮助用户优化简历和提供面试建议。
+        
+        请遵循以下工作流：
+        1. 分析用户提供的岗位 JD (Job Description)。
+        2. 提取核心技能关键词。
+        3. 针对用户的背景，给出具体的简历修改建议。
+        4. 预测 3 个可能的面试题。
+        
+        输出格式要求：结构清晰，使用 Markdown 列表。
+        """
+
+    def analyze_job(self, job_description: str) -> str:
+        """核心逻辑：调用大模型进行分析"""
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        try:
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo", 
+                messages=[
+                    {"role": "system", "content": self.system_prompt},
+                    {"role": "user", "content": f"请分析这个岗位：{job_description}"}
+                ],
+                temperature=0.7
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            return f"系统出错了: {str(e)}"
+
+if __name__ == "__main__":
+    print("--- AI-Career-Copilot Agent 启动 ---")
+    agent = CareerCopilotAgent()
+    user_input = "我想应聘阿里云的 AI 产品经理，JD 要求懂大模型和 Prompt Engineering..."
+    print(f"\n正在分析岗位: {user_input[:30]}...")
+    result = agent.analyze_job(user_input)
+    print("\n--- Agent 建议 ---")
+    print(result)
