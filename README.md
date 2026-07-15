@@ -145,3 +145,29 @@ Prompt调用
 - 支持更多岗位类型分析；
 - 增加用户反馈闭环；
 - 优化Agent任务规划能力。
+---
+
+## 技术实现与快速开始
+
+本项目不仅提供了完整的 AI 产品设计思路，还包含了可运行的核心代码与 RAG 知识库。
+
+### 项目核心目录
+- app/：包含 AI Agent 核心逻辑代码 (career_agent.py)。
+- knowledge_base/：包含 RAG 检索增强生成所需的岗位知识库 (AI岗位知识.md)。
+- docs/：完整的产品设计、Prompt 工程与 Agent 架构文档。
+
+### 如何本地运行
+如果你想亲自体验这个 AI Agent，请按照以下步骤操作：
+
+1. 克隆仓库到本地
+git clone https://github.com/你的用户名/AI-Career-Copilot.git
+cd AI-Career-Copilot
+
+2. 安装依赖
+pip install -r requirements.txt
+
+3. 配置 API Key
+在你的电脑环境变量中设置 OPENAI_API_KEY。
+
+4. 启动 AI Agent
+python app/career_agent.py
