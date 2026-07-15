@@ -171,3 +171,5 @@ pip install -r requirements.txt
 
 4. 启动 AI Agent
 python app/career_agent.py
+
+ ![Agent 核心工作流](./docs/Img_2026_0715_180450.png) 
